@@ -12,7 +12,7 @@ _Description what the app does, for whom, and its main idea_
 |---|---|---|
 | 1. Requirements analysis | [Student stories](docs/part1/01-user-stories-student.md) | R2–R6 |
 | | [Club and admin stories](docs/part1/02-user-stories-club-admin.md) | R1, R3, R5, R6 |
-| | [Own features](docs/part1/03-features.md) | – |
+| | [Features](docs/part1/03-features.md) | – |
 | 2. Challenges and assumptions | [Risks and assumptions](docs/part1/04-challenges-assumptions.md) | – |
 | 3. Technical design | [Architecture and data](docs/part1/05-architecture-data.md) | R1, R5, R6 |
 | | [Attendance and security](docs/part1/06-attendance-security.md) | R3 |
