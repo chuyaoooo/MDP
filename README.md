@@ -4,7 +4,7 @@ COMP3040 Mobile Device Programming · Group E · Part 1: Requirements and Analys
 _Description what the app does, for whom, and its main idea_
 
 ## Team Members
-| Member | GitHub | Lane | Owns |
+| Member | GitHub | Section |
 |---|---|---|---|
 
 ## Part 1 – Proposal
