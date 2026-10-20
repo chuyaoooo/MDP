@@ -1,5 +1,5 @@
-# MDP s-CPD App – <app name>
-COMP3040 Mobile Device Programming · Group E · Part 1: Requirements and Analysis
+# MDP s-CPD App <app name>
+COMP3040 Mobile Device Programming · Group E
 
 _Description what the app does, for whom, and its main idea_
 
