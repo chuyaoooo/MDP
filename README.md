@@ -4,8 +4,12 @@ COMP3040 Mobile Device Programming · Group E
 _Description what the app does, for whom, and its main idea_
 
 ## Team Members
-| Member | GitHub | Section|
+| Member | GitHub | Section |
 |---|---|---|
+| 1. Chu Yao Ang | @chuyaoooo | 1 |
+| 2. Karam Allahham | @Karam- Allahham | 4 |
+| 3. Chengyu Qian | @abusi-20 | 3 |
+| 4. Chen Shen | @yeki chen | 2 |
 
 ## Part 1 – Proposal
 | Section | Document | Covers |
