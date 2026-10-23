@@ -8,8 +8,8 @@ _Description what the app does, for whom, and its main idea_
 |---|---|---|
 | 1. Chu Yao Ang | @chuyaoooo | 1 |
 | 2. Karam Allahham | @Karam- Allahham | 4 |
-| 3. Chengyu Qian | @abusi-20 | 3 |
-| 4. Chen Shen | @yeki chen | 2 |
+| 3. Chengyu Qian | @abusi-20 | 2 |
+| 4. Chen Shen | @yeki chen | 3 |
 
 ## Part 1 – Proposal
 | Section | Document | Covers |
