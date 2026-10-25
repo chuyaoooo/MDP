@@ -13,6 +13,7 @@ Must = committed for Part 2; Nice = if time allows. "Club organiser" is the Club
 | C-05 | As a club organiser, I want to open and close attendance and show a rotating QR and code so that only people in the room can check in. | Given an Approved event on its day, when I tap Start attendance, then the QR and code refresh every 10 s and check-ins are accepted; after Close, they are rejected (server time). | Must | R3 |
 | C-06 | As a club organiser, I want to see sign-ups and check-ins so that I can spot problems on the day and report attendance afterwards. | Given an Approved event, then I see the sign-up rate and attendee list, with check-ins appearing within seconds and, after closing, attended and no-show counts. | Must | R3 |
 | C-07 | As a club organiser, I want to request cancellation of an approved event with a reason so that students are told properly when plans change. | Given an Approved event, when I submit a reason and the S-CPD admin approves, then it is Cancelled and booked and waitlisted students are notified with the reason. | Nice | R1 |
+| C-08 | As a club organiser, I want to toggle walk-ins on or off during my event so that I can fill empty seats without exceeding room capacity. | Given an active event check-in window, when I set walk-ins to "Allowed", then unbooked students who scan the code are recorded as attendees.<br>Given walk-ins are "Disallowed", when an unbooked student attempts to check in, their request is rejected. | Nice | R3 |
 
 ## S-CPD admin (backend)
 
