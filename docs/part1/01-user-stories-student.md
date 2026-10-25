@@ -1,1 +1,17 @@
+# Student user stories
 
+Must = committed for Part 2; Nice = if time allows. Criteria assume a signed-in student. "Code" = the QR and typed code the club shows, refreshed every 10 s while attendance is open.
+
+| ID | Story | Acceptance criteria | Priority | Req |
+|----|-------|---------------------|----------|-----|
+| S-01 | As a student, I want to sign in with my university account so that only I can use my bookings and points. | Given valid credentials, when I sign in, then I reach Explore (there is no sign-up).<br>Given a club screen or another student's record, when I try to open it, then access is denied. | Must | R6 |
+| S-02 | As a student, I want to browse events by day and filter by S-CPD category or club so that I quickly find ones worth attending. | Given approved events, when I pick a day (Mon–Sun) or filter, then matches show places left and points. | Must | R2 |
+| S-03 | As a student, I want to book a place without double-booking so that I never commit to two events at once. | Given a free place, when I tap Book, then it appears in My events.<br>Given an overlapping booking, when I tap Book, then booking is blocked and names the clash. | Must | R2 |
+| S-04 | As a student, I want a waitlist for full events, and to cancel my booking, so that I still get a chance and can free my place. | Given a full event, when I join the waitlist, then I am invited to register if a place frees.<br>Given the event is at least 2 days away, when I cancel, then my place is released; closer than that, Cancel is unavailable. | Must | R2 |
+| S-05 | As a student, I want to check in by scanning the club's QR or typing its code so that I am counted quickly in a crowded room. | Given attendance is open and I am in the room, when I scan or type the current code, then I see "Checked in". | Must | R3 |
+| S-06 | As a student, I want old or shared codes refused so that classmates who were not there cannot earn points I worked for. | Given a code older than 10 s (for example a forwarded screenshot), when it is submitted, then it is rejected as expired.<br>Given attendance is closed or I already checked in, when I submit a code, then it is rejected. | Must | R3 |
+| S-07 | As a student, I want to check in without a connection and see what has synced so that poor signal never costs me points. | Given no connection, when I scan or type a code, then it is saved on my device as Pending.<br>Given the connection returns, then it uploads and shows Synced, or Rejected with a reason. | Must | R4 |
+| S-08 | As a student, I want forged or repeated records rejected so that cheating cannot devalue my points. | Given a record uploaded twice, or edited on the device, when the server receives it, then it is credited at most once or rejected. | Must | R3, R4 |
+| S-09 | As a student, I want to see my points and event history so that I know where my S-CPD record stands. | Given an attended event, when it ends and the S-CPD admin approves attendance, then Points shows it as Credited; until then, Pending. | Must | R5 |
+| S-10 | As a student, I want to be told when points are removed, and why, so that I understand and can respond. | Given my record, when the S-CPD admin invalidates it, then my total drops and I receive a notification with the reason. | Must | R5 |
+| S-11 | As a student without a booking, I want to check in when the club allows walk-ins so that last-minute attendance still counts. | Given walk-ins are allowed, when I submit a valid code, then I am recorded as a walk-in. | Nice | R3 |
