@@ -1,6 +1,6 @@
-# 2. Challenges and assumptions
+# Challenges and assumptions
 
-## 2.1 Key risks
+## Key risks
 
 ### 1. Emulator limits for attendance
 The emulator can't scan a live QR, making attendance (R3) hard to test or demo. Fallbacks: QR images through the virtual camera, or manual code entry for crowded rooms.
@@ -17,7 +17,7 @@ Location-based check-in would track students beyond events; QR collects no locat
 ### 5. Time and scope
 The list is long: waitlist, clash detection, offline booking, points ledger. We split must-have from nice-to-have ("must" is built in Part 2) and cap own features at two.
 
-## 2.2 Assumptions
+## Assumptions
 
 - Admins work in the backend, not an app UI.
 - Events are single-session and in person; check-in proves presence, not identity.
