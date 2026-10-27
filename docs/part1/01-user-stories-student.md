@@ -14,7 +14,7 @@ All stories are written from a student perspective.
 | S-06 | I want old/expired codes refused so that non-attendees cannot earn points I worked for. | Code >10 s old, closed window, or already checked in → rejected. | Must | R3 |
 | S-07 | I want to check in without a connection so that poor signal never costs me points. | No connection → saved as Pending. Sync → Synced / Rejected with reason. | Must | R4 |
 | S-08 | I want forged or repeated records rejected for fairness. | Duplicate or tampered upload → credited at most once or rejected. | Must | R3, R4 |
-| S-09 | I want to see my points and event history to know my record. | Verified attendance → Credited (after admin approval). Until then Pending. Event history shown in profile. | Must | R5 |
+| S-09 | I want to see my points and event history to know my record. | Verified attendance → Credited. Until then Pending. Event history shown in profile. | Must | R5 |
 | S-10 | I want to be told when points are removed, and why, so that I understand and can respond. | GAdmin invalidates → total drops + reason notification. | Must | R5 |
 | S-11 | If without a booking, I want to check in when the club allows walk-ins so that last-minute attendance still counts. | Walk-ins allowed + valid code → recorded as walk-in. | Nice | R3 |
 | S-12 | I want to book an event while offline so that I don't miss an opportunity when my connection drops. | No connection → Pending locally. Sync → Confirmed / Waitlisted / Rejected. | Must | R2, R4 |
