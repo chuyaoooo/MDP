@@ -4,8 +4,8 @@ Must = committed for Part 2; Nice = if time allows. Criteria assume a signed-in 
 
 All stories are written from a student perspective. 
 
-| ID | Story | Acceptance criteria | Priority |
-|----|-------|---------------------|----------|
+| ID | Story | Acceptance criteria | Priority | Req |
+|-----|-------|---------------------|----------| --- |
 | S-01 | I want to sign in with my university account for convienience. | Valid credentials → Explore. Club/admin screens or other students’ data → access denied. | Must | R6 |
 | S-02 | I want to browse events by day and filter by S-CPD category or club so that I quickly find ones worth attending. | Able to filter to find approved events shown with places left and points. | Must | R2 |
 | S-03 | I want to book a place without double-booking to never commit to two events.| Free place → appears in My events. Overlap → blocked with clash named.| Must | R2 |
