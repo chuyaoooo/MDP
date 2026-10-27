@@ -21,7 +21,7 @@ _Description what the app does, for whom, and its main idea_
 | 3. Technical design | [Architecture and data](docs/part1/05-architecture-data.md) | R1, R5, R6 |
 | | [Attendance and security](docs/part1/06-attendance-security.md) | R3 |
 | | [Offline sync](docs/part1/07-offline-sync.md) | R4 |
-| 4. User interface | [Student UI](docs/part1/08-ui-student.md), [Club UI](docs/part1/09-ui-club.md) | all |
+| 4. User interface | [Student UI](docs/part1/Student UI), [Club UI](docs/part1/Club UI) | all |
 
 ## Part 2 (added later)
 Build and run · Report · Testing · Demo
