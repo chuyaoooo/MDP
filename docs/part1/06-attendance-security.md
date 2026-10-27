@@ -1,10 +1,12 @@
-# 3. Technical Design — Attendance and Security
+# Technical Design — Attendance and Security
 
-## 3.3 Attendance Design
+## Attendance Design
 
-Clubs open a check-in window (proposed default: five minutes), during which signed QR and matching manual codes refresh every ten seconds. A proposed ten-second grace period allows completion of manual entry. Clubs prefetch backend-signed, time-limited challenges so codes remain displayable offline. Students scan or enter a code; Firestore queues offline evidence. Cloud Functions checks identity, approved event, booking or authorised walk-in, signature, permitted server-time slot and duplicates. The emulator supports manual entry or a virtual camera. Online checks use server time, whereas offline uploads cannot prove the actual scan time. **Drawbacks:** Short rotations challenge crowded rooms; grace periods facilitate sharing; preloaded codes may leak from compromised devices. GPS-only verification was rejected because indoor location is unreliable.
+Clubs open a check-in window (proposed default: five minutes), during which signed QR and matching manual codes refresh every ten seconds. A proposed ten-second grace period allows completion of manual entry. Clubs prefetch backend-signed, time-limited challenges so codes remain displayable offline. Students scan or enter a code; Firestore queues offline evidence. Cloud Functions checks identity, approved event, booking or authorised walk-in, signature, permitted server-time slot and duplicates. The emulator supports manual entry or a virtual camera. Online checks use server time, whereas offline uploads cannot prove the actual scan time. 
 
-**Figure 3 — Attendance Verification Flow**
+**Drawbacks:** Short rotations challenge crowded rooms; grace periods facilitate sharing; preloaded codes may leak from compromised devices. GPS-only verification was rejected because indoor location is unreliable.
+
+**Attendance Verification Flow**
 
 ```mermaid
 %%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#ffffff","primaryTextColor":"#000000","primaryBorderColor":"#000000","secondaryColor":"#ffffff","tertiaryColor":"#ffffff","lineColor":"#000000","textColor":"#000000","edgeLabelBackground":"#ffffff"}}}%%
@@ -26,11 +28,13 @@ flowchart TD
     linkStyle default stroke:#000000,stroke-width:1.5px;
 ```
 
-## 3.4 Security Analysis
+## Security Analysis
 
-Signatures deter forgery, unpredictable manual codes and rate limits deter guessing, and unique student–event keys prevent repeated awards. Server-side permissions protect approval and points operations. However, live QR sharing can enable remote check-in, and an offline signed token cannot prove the student's actual scan time or physical presence. Uncertain offline claims therefore require organiser or administrator review before points are credited. **Drawbacks:** Manual checks increase workload; BLE/NFC proximity methods might provide stronger evidence but require hardware and emulator workarounds. No proposed method eliminates impersonation completely.
+Signatures deter forgery, unpredictable manual codes and rate limits deter guessing, and unique student–event keys prevent repeated awards. Server-side permissions protect approval and points operations. However, live QR sharing can enable remote check-in, and an offline signed token cannot prove the student's actual scan time or physical presence. Uncertain offline claims therefore require organiser or administrator review before points are credited. 
 
-**Table 1 — Security Threat Analysis**
+**Drawbacks:** Manual checks increase workload; BLE/NFC proximity methods might provide stronger evidence but require hardware and emulator workarounds. No proposed method eliminates impersonation completely.
+
+**Security Threat Analysis**
 
 | Attack | Prevention | Remaining weakness |
 |---|---|---|
