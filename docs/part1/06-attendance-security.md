@@ -1,53 +1,41 @@
-# 3.3–3.4 Attendance Design and Security Analysis
+# 3. Technical Design — Attendance and Security
 
 ## 3.3 Attendance Design
 
-A club can open a check-in window near the beginning of an event or during the event. **The QR code refreshes every 10 seconds; the overall check-in window does not close after 10 seconds.** The club can start and end the window manually; a **five-minute default** is proposed (**group confirmation required**). Each QR challenge includes an event identifier, a time-slot identifier, a nonce and a digital signature issued by the backend. A corresponding manual code provides an alternative when scanning is inconvenient. The previous manual code may be accepted for a **proposed additional 10-second grace period** to avoid expiration during entry (**to confirm**).
+Clubs open a check-in window (proposed default: five minutes), during which signed QR and matching manual codes refresh every ten seconds. A proposed ten-second grace period allows completion of manual entry. Clubs prefetch backend-signed, time-limited challenges so codes remain displayable offline. Students scan or enter a code; Firestore queues offline evidence. Cloud Functions checks identity, approved event, booking or authorised walk-in, signature, permitted server-time slot and duplicates. The emulator supports manual entry or a virtual camera. Online checks use server time, whereas offline uploads cannot prove the actual scan time. **Drawbacks:** Short rotations challenge crowded rooms; grace periods facilitate sharing; preloaded codes may leak from compromised devices. GPS-only verification was rejected because indoor location is unreliable.
 
-Before an event, the **club device** can preload a limited set of backend-signed challenges valid only within pre-authorised check-in time slots. If the club's network connection fails, the device can still display challenges in sequence. **Future valid challenges must not be distributed to students in advance**, because this would increase the risk of remote check-in.
-
-For online check-in, Cloud Functions verifies the authenticated user's identity, the approved event, an existing booking or club-authorised walk-in, the QR signature, the valid server-time slot and duplicate attendance. For offline check-in, the student's app stores signed scan evidence locally and submits it when connectivity returns. **An offline claim cannot be accepted solely on the basis of a device timestamp.** The emulator demonstration can use a virtual camera or manual code entry.
-
-**Figure 3: Attendance Verification Flow**
+**Figure 3 — Attendance Verification Flow**
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#ffffff","primaryTextColor":"#000000","primaryBorderColor":"#000000","secondaryColor":"#ffffff","tertiaryColor":"#ffffff","lineColor":"#000000","textColor":"#000000","edgeLabelBackground":"#ffffff","mainBkg":"#ffffff","nodeBorder":"#000000","clusterBkg":"#ffffff","clusterBorder":"#000000","labelTextColor":"#000000","labelBoxBkgColor":"#ffffff","labelBoxBorderColor":"#000000"}}}%%
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#ffffff","primaryTextColor":"#000000","primaryBorderColor":"#000000","secondaryColor":"#ffffff","tertiaryColor":"#ffffff","lineColor":"#000000","textColor":"#000000","edgeLabelBackground":"#ffffff"}}}%%
 flowchart TD
-    A["Club opens check-in window"] --> B["Display current signed QR / manual code"]
-    B --> C["Change challenge every 10 seconds"]
-    C -->|Window remains open| B
-    B --> D["Student scans QR or enters code"]
-    D --> NET{"Network available?"}
-    NET -->|Yes| ONLINE["Submit online request"]
-    NET -->|No| OFFLINE["Cache signed attendance evidence"]
-    OFFLINE --> SYNC["Synchronise when connection returns"]
-    ONLINE --> VERIFY["Cloud Functions checks identity, signature and time slot"]
-    SYNC --> VERIFY
-    VERIFY --> RESULT{"Verification result"}
-    RESULT -->|Valid online claim| OK["Verified attendance"]
-    RESULT -->|Insufficient offline evidence| REVIEW["Administrator review"]
-    RESULT -->|Invalid| BAD["Rejected attendance"]
-    REVIEW -->|Approved| OK
-    REVIEW -->|Rejected| BAD
-    OK --> POINTS["Credit points immediately"]
+    A["Club opens check-in window"] --> B["Signed QR and manual code"]
+    B -->|Rotate every 10 seconds while open| B
+    B --> C["Student scans or enters code"]
+    C --> N{"Online?"}
+    N -->|Yes| V["Cloud Functions verification"]
+    N -->|No| Q["Store signed evidence offline"]
+    Q -->|Reconnect and upload| V
+    V --> R{"Decision"}
+    R -->|Valid| OK["Verified; credit points"]
+    R -->|Offline timing uncertain| REV["Manual review"]
+    R -->|Invalid| BAD["Rejected"]
+    REV -->|Accepted| OK
+    REV -->|Rejected| BAD
     classDef default fill:#ffffff,stroke:#000000,color:#000000,stroke-width:1.5px;
-    linkStyle default stroke:#000000,color:#000000,stroke-width:1.5px;
+    linkStyle default stroke:#000000,stroke-width:1.5px;
 ```
 
 ## 3.4 Security Analysis
 
-Security decisions are performed on the backend rather than on a modifiable client. Digital signatures make forged QR challenges harder to submit; unpredictable manual codes and rate limits reduce guessing. Each student-event pair may have only one accepted attendance record, and idempotent backend processing prevents repeated uploads from generating duplicate points. Firestore Security Rules and Cloud Functions enforce role and operation permissions.
+Signatures deter forgery, unpredictable manual codes and rate limits deter guessing, and unique student–event keys prevent repeated awards. Server-side permissions protect approval and points operations. However, live QR sharing can enable remote check-in, and an offline signed token cannot prove the student's actual scan time or physical presence. Uncertain offline claims therefore require organiser or administrator review before points are credited. **Drawbacks:** Manual checks increase workload; BLE/NFC proximity methods might provide stronger evidence but require hardware and emulator workarounds. No proposed method eliminates impersonation completely.
 
-However, **a rotating QR code does not completely prevent remote check-in**. Someone physically present may share the current challenge with an absent student in real time. Even when an offline challenge carries a valid signature, the server cannot establish precisely when or where it was scanned; trusting a local timestamp does not solve this limitation. Suspicious or delayed offline records therefore require review, and club organisers can carry out random on-site spot-checks. Compared with BLE or NFC, this approach requires less specialised hardware and is easier to demonstrate on the emulator, but it cannot provide absolute proof of physical presence.
-
-**Table 1: Attacks, Preventive Measures and Remaining Weaknesses**
+**Table 1 — Security Threat Analysis**
 
 | Attack | Prevention | Remaining weakness |
 |---|---|---|
-| Remote check-in | 10-second QR rotation, authenticated identity, on-site spot-checks | Current valid codes can still be shared live |
-| Forged QR challenge | Backend signature and authorised-slot validation | Legitimate codes may be captured and forwarded |
-| Manual-code guessing | Unpredictable codes and rate limiting | A valid code can still be shared |
-| Duplicate submission / replay | Unique student-event attendance key and idempotent processing | A stolen account could still be abused |
-| Forged offline capture time | Signed challenges, backend validation and manual review | Actual scan time cannot be independently proven |
-| Privilege escalation | Server-assigned roles and Firestore Security Rules | Stolen privileged credentials remain a risk |
-| Points tampering | Backend-only ledger writes and reversal entries | Administrative mistakes or compromised accounts |
+| Remote check-in | Rotating QR; spot-checks | Live forwarding |
+| Forged or guessed codes | Signatures; rate limits | Valid codes can leak |
+| Repeated requests | Unique keys; idempotency | Stolen accounts |
+| Fake offline time | Signed slots; manual review | Scan time unprovable |
+| Privilege abuse | Backend roles; ledger | Admin compromise |
