@@ -21,6 +21,7 @@ The list is long: waitlist, clash detection, offline booking, points ledger. We 
 
 - Admins work in the backend, not an app UI.
 - Events are single-session and in person; check-in proves presence, not identity.
+- A phone connects to the projector to show the attendance QR.
 - Booking works offline through the cache.
 - Accounts are created by the university; backend rules enforce roles.
-- Points are credited after admin approval; invalid records are reversed.
+- Points are credited after cloud verification; admins can still reverse records.
