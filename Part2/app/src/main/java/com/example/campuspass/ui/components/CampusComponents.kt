@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.example.campuspass.ui.theme.BorderGrey
 import com.example.campuspass.ui.theme.Navy
 import com.example.campuspass.ui.theme.PlaceholderGrey
+import com.example.campuspass.ui.theme.SystemGrey
 import com.example.campuspass.ui.theme.TextPrimary
 import com.example.campuspass.ui.theme.TextSecondary
 import com.example.campuspass.ui.theme.White
@@ -249,6 +251,8 @@ fun CampusBottomBar(
                 }
             }
         }
+        // Grey strip behind the phone's own navigation bar, as in Figma
+        Box(Modifier.fillMaxWidth().background(SystemGrey).navigationBarsPadding())
     }
 }
 
