@@ -25,10 +25,10 @@ object SampleEventRepository : EventRepository {
             category = EventCategory.CAREERS,
             start = at(2, 14), end = at(2, 15, 30),
             cpdPoints = 10, capacity = 40, bookedCount = 28,
-            location = "Block F, Room F2A04",
-            organiser = "Careers Society",
+            location = "Block F1 · Room F1A23",
+            organiser = "Careers Service",
             description = "Build a CV that stands out and practise interview answers with recruiters.",
-            eligibleCourses = listOf("BSc Computer Science", "BSc Software Engineering", "BEng Electrical Engineering")
+            eligibleCourses = listOf("BA Business Management", "BA Marketing", "BSc Accounting and Finance")
         ),
         Event(
             id = "leadership-lab",
@@ -36,10 +36,10 @@ object SampleEventRepository : EventRepository {
             category = EventCategory.SKILLS,
             start = at(2, 15), end = at(2, 16),
             cpdPoints = 15, capacity = 20, bookedCount = 12,
-            location = "Trent Building, Room TB102",
+            location = "Trent Building · Room TB102",
             organiser = "Student Leaders Club",
             description = "Hands-on activities on leading a team, giving feedback and running meetings.",
-            eligibleCourses = listOf("All courses")
+            eligibleCourses = listOf("BA Business Management", "BSc Computer Science", "BEng Electrical Engineering")
         ),
         Event(
             id = "sustainable-futures",
@@ -50,7 +50,7 @@ object SampleEventRepository : EventRepository {
             location = "Great Hall",
             organiser = "Green Society",
             description = "A guest talk on sustainability careers and how students can get involved.",
-            eligibleCourses = listOf("All courses")
+            eligibleCourses = listOf("BSc Computer Science", "BEng Electrical Engineering")
         ),
         Event(
             id = "data-viz",
@@ -58,7 +58,7 @@ object SampleEventRepository : EventRepository {
             category = EventCategory.SKILLS,
             start = at(10, 10), end = at(10, 13),
             cpdPoints = 20, capacity = 25, bookedCount = 25,
-            location = "Block B, Computer Lab 2",
+            location = "Block B · Computer Lab 2",
             organiser = "Computer Science Society",
             description = "Turn raw data into clear charts using Python.",
             eligibleCourses = listOf("BSc Computer Science", "BSc Software Engineering")

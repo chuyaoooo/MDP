@@ -22,8 +22,13 @@ data class Event(
     val location: String,
     val organiser: String,
     val description: String,
+    /** Courses whose students earn s-CPD points here. Empty means every course qualifies. */
     val eligibleCourses: List<String> = emptyList()
 ) {
     val placesLeft: Int get() = (capacity - bookedCount).coerceAtLeast(0)
     val isFull: Boolean get() = placesLeft == 0
+    val isOpenToAllCourses: Boolean get() = eligibleCourses.isEmpty()
+
+    /** True if a student on [course] can earn points at this event. */
+    fun qualifiesFor(course: String): Boolean = isOpenToAllCourses || course in eligibleCourses
 }

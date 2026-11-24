@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.campuspass.ui.theme.BorderGrey
@@ -191,7 +192,8 @@ fun EventCard(
     title: String,
     details: List<String>,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    highlight: String? = null
 ) {
     Row(
         modifier = modifier
@@ -201,7 +203,8 @@ fun EventCard(
             .padding(12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        ImagePlaceholder(Modifier.size(width = 64.dp, height = 78.dp))
+        // The image is taller when the card has the extra eligibility line (Figma 03)
+        ImagePlaceholder(Modifier.size(width = 64.dp, height = if (highlight != null) 88.dp else 78.dp))
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(5.dp)
@@ -210,8 +213,22 @@ fun EventCard(
             details.forEach { line ->
                 Text(line, style = MaterialTheme.typography.bodySmall)
             }
+            if (highlight != null) {
+                Text(highlight, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.SemiBold)
+            }
         }
     }
+}
+
+/** Small underlined text button, e.g. "Clear" and "Change" in the course filter. */
+@Composable
+fun TextAction(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodySmall,
+        textDecoration = TextDecoration.Underline,
+        modifier = modifier.clickable(role = Role.Button, onClick = onClick)
+    )
 }
 
 /** One destination in the student bottom bar. */
